@@ -20,6 +20,8 @@ Vagrant.configure(2) do |config|
 
    echo '[ $SHLVL -eq 1 ] && eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"' >> /home/vagrant/.profile
 
+   echo 'eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"; cpanm $@' > wcpanm && chmod 755 wcpanm
+
   SHELL
 
 end
