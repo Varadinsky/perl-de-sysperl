@@ -14,11 +14,15 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", :privileged => false, inline: <<-SHELL
 
    sudo apt-get update
-   
-   sudo apt-get install -y build-essential
-   sudo apt-get install -y liblocal-lib-perl
-   sudo apt-get install -y cpanminus
-   sudo apt-get install -y perl-doc
+
+   packages=(
+	     build-essential
+	     liblocal-lib-perl
+	     cpanminus
+	     perl-doc
+	    )
+
+   sudo apt-get install -y ${packages[@]} 
 
    echo '[ $SHLVL -eq 1 ] && eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"' >> $HOME/.profile
 
