@@ -30,7 +30,7 @@ Vagrant.configure(2) do |config|
    
    # This may take a while.
 
-   distros=(
+   CPAN=(
 	    Dist::Zilla
 	    Module::Starter
 
@@ -45,9 +45,9 @@ Vagrant.configure(2) do |config|
    if [ -x $HOME/wcpanm ]
 
    then
-	$HOME/wcpanm ${distros[@]}
+	$HOME/wcpanm ${CPAN[@]}
    else
-	echo "Unable to install distros!"
+	echo "Unable to install CPAN distributions!"
    fi
 
 
