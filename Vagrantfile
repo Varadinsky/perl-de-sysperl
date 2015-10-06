@@ -24,6 +24,7 @@ Vagrant.configure(2) do |config|
 
    CPAN=(
 	    Dist::Zilla
+	    Zilla::Dist
 	    Module::Starter
 
 	    Perl::Tidy
