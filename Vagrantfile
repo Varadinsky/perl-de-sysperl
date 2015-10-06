@@ -20,6 +20,7 @@ Vagrant.configure(2) do |config|
 	     cpanminus
 	     perl-doc
 	     git
+	     libssl-dev
 	    )
 
    CPAN=(
