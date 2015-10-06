@@ -19,6 +19,7 @@ Vagrant.configure(2) do |config|
 	     liblocal-lib-perl
 	     cpanminus
 	     perl-doc
+	     git
 	    )
 
    CPAN=(
