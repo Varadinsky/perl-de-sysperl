@@ -34,6 +34,8 @@ Vagrant.configure(2) do |config|
 	    Devel::NYTProf
 	    Devel::REPL
 	    Devel::Cover
+	
+            App::Ack
 	 )
 
    sudo apt-get update
