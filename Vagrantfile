@@ -36,6 +36,9 @@ Vagrant.configure(2) do |config|
 	    Devel::Cover
 	
             App::Ack
+
+	    Pod::Readme
+	    Software::License
 	 )
 
    sudo apt-get update
