@@ -28,8 +28,13 @@ Vagrant.configure(2) do |config|
 	    Zilla::Dist
 	    Module::Starter
 
+	    CPAN::Uploader
+
+	    Data::Dumper
+
 	    Perl::Tidy
 	    Perl::Critic
+	    Perl::Version
 
 	    Devel::NYTProf
 	    Devel::REPL
