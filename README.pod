@@ -8,6 +8,12 @@ Simple Perl development environment that uses Trusty's system perl (v5.18.2) and
 
 =head1 SYNOPSIS
 
+You will need Vagrant and VirtualBox to run this environment.
+
+	git clone https://github.com/Varadinsky/perl-de-sysperl.git
+	cd perl-de-sysperl
+	vagrant up
+
 To install new modules from host machine, use '~/wcpanm' wrapper for cpanm, it will make sure that all local::lib environment variables are present.  
 
 vagrant ssh -c './wcpanm Perl::Module'
