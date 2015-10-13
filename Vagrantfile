@@ -51,7 +51,11 @@ Vagrant.configure(2) do |config|
 
    echo '[ $SHLVL -eq 1 ] && eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"' >> $HOME/.profile
    echo 'eval "$( perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"; cpanm $@' > $HOME/wcpanm && chmod 755 $HOME/wcpanm 
-   
+
+#
+# TODO: Put wcpanm wrapper script in a local bin directory (~/bin).
+#   
+
    # This may take a while.
    if [ -x $HOME/wcpanm ]
    then
