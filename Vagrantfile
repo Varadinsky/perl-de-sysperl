@@ -15,15 +15,26 @@ Vagrant.configure(2) do |config|
 
 # I should probably move them to separate files.
 
+  #################
+  # CONFIG SCRIPT #
+  #################
+
   config.vm.provision "shell", :privileged => false, inline: <<-CONFIG
-  mkdir -p ~/opt/bin
-  echo PATH=~/opt/bin:$PATH >> ~/.profile
-  echo '[ $SHLVL -eq 1 ] && eval "$(perl -I~/perl5/lib/perl5 -Mlocal::lib)"' >> ~/.profile
-  echo 'eval "$( perl -I~/perl5/lib/perl5 -Mlocal::lib)"; cpanm $@' > ~/opt/bin/wcpanm && chmod 755 ~/opt/bin/wcpanm 
+
+   mkdir -p ~/opt/bin
+   echo PATH=~/opt/bin:$PATH >> ~/.profile
+   echo '[ $SHLVL -eq 1 ] && eval "$(perl -I~/perl5/lib/perl5 -Mlocal::lib)"' >> ~/.profile
+   echo 'eval "$( perl -I~/perl5/lib/perl5 -Mlocal::lib)"; cpanm $@' > ~/opt/bin/wcpanm && chmod 755 ~/opt/bin/wcpanm 
+
   CONFIG
+
+  ##########################
+  # UBUNTU PACKAGES SCRIPT #
+  ##########################
 
   config.vm.provision "shell", inline: <<-INSTALL
 
+  # Simply add packages you want to this array.
    packages=(
 	     build-essential
 	     liblocal-lib-perl
@@ -38,7 +49,13 @@ Vagrant.configure(2) do |config|
 
   INSTALL
 
+  #############################
+  # CPAN DISTRIBUTIONS SCRIPT #
+  #############################
+
   config.vm.provision "shell", :privileged => false, inline: <<-CPAN
+
+  # Simply add distributions you want to this array.
    CPAN=(
 	    Dist::Zilla
 	    Zilla::Dist
