@@ -30,7 +30,7 @@ Vagrant.configure(2) do |config|
 	     cpanminus
 	     perl-doc
 	     git
-#	     libssl-dev
+	     libssl-dev
 	    )
 
    apt-get update
@@ -40,25 +40,25 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", :privileged => false, inline: <<-CPAN
    CPAN=(
-#	    Dist::Zilla
-#	    Zilla::Dist
-#	    Module::Starter
+	    Dist::Zilla
+	    Zilla::Dist
+	    Module::Starter
 
-#	    CPAN::Uploader
+	    CPAN::Uploader
 
-#	    Data::Dumper
+	    Data::Dumper
 
-#	    Perl::Tidy
-#	    Perl::Critic
-#	    Perl::Version
+	    Perl::Tidy
+	    Perl::Critic
+	    Perl::Version
 
-#	    Devel::NYTProf
-#	    Devel::REPL
-#	    Devel::Cover
+	    Devel::NYTProf
+	    Devel::REPL
+	    Devel::Cover
 	
-#            App::Ack
+            App::Ack
 
-#	    Pod::Readme
+	    Pod::Readme
 	    Software::License
 	 )
 
