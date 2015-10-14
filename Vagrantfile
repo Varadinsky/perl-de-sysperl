@@ -11,8 +11,18 @@ Vagrant.configure(2) do |config|
 
   config.ssh.username = "vagrant"
 
-  config.vm.provision "shell", :privileged => false, inline: <<-SHELL
+# There are 3 inline scripts: config files script, ubuntu packages install script and CPAN distribution install script.
 
+# I should probably move them to separate files.
+
+  config.vm.provision "shell", :privileged => false, inline: <<-CONFIG
+  mkdir -p ~/opt/bin
+  echo PATH=~/opt/bin:$PATH >> ~/.profile
+  echo '[ $SHLVL -eq 1 ] && eval "$(perl -I~/perl5/lib/perl5 -Mlocal::lib)"' >> ~/.profile
+  echo 'eval "$( perl -I~/perl5/lib/perl5 -Mlocal::lib)"; cpanm $@' > ~/opt/bin/wcpanm && chmod 755 ~/opt/bin/wcpanm 
+  CONFIG
+
+  config.vm.provision "shell", inline: <<-INSTALL
 
    packages=(
 	     build-essential
@@ -20,53 +30,45 @@ Vagrant.configure(2) do |config|
 	     cpanminus
 	     perl-doc
 	     git
-	     libssl-dev
+#	     libssl-dev
 	    )
 
+   apt-get update
+   apt-get install -y ${packages[@]} 
+
+  INSTALL
+
+  config.vm.provision "shell", :privileged => false, inline: <<-CPAN
    CPAN=(
-	    Dist::Zilla
-	    Zilla::Dist
-	    Module::Starter
+#	    Dist::Zilla
+#	    Zilla::Dist
+#	    Module::Starter
 
-	    CPAN::Uploader
+#	    CPAN::Uploader
 
-	    Data::Dumper
+#	    Data::Dumper
 
-	    Perl::Tidy
-	    Perl::Critic
-	    Perl::Version
+#	    Perl::Tidy
+#	    Perl::Critic
+#	    Perl::Version
 
-	    Devel::NYTProf
-	    Devel::REPL
-	    Devel::Cover
+#	    Devel::NYTProf
+#	    Devel::REPL
+#	    Devel::Cover
 	
-            App::Ack
+#            App::Ack
 
-	    Pod::Readme
+#	    Pod::Readme
 	    Software::License
 	 )
 
-   sudo apt-get update
-   sudo apt-get install -y ${packages[@]} 
-
-   mkdir -p ~/opt/bin
-   echo PATH=~/opt/bin:$PATH >> ~/.profile
-   echo '[ $SHLVL -eq 1 ] && eval "$(perl -I~/perl5/lib/perl5 -Mlocal::lib)"' >> ~/.profile
-   echo 'eval "$( perl -I~/perl5/lib/perl5 -Mlocal::lib)"; cpanm $@' > ~/opt/bin/wcpanm && chmod 755 ~/opt/bin/wcpanm 
-
-#
-# TODO: Put wcpanm wrapper script in a local bin directory (~/bin).
-#   
-
    # This may take a while.
-   if [ -x $HOME/wcpanm ]
+   if [ -x ~/opt/bin/wcpanm ]
    then
-	$HOME/wcpanm ${CPAN[@]}
+	~/opt/bin/wcpanm ${CPAN[@]}
    else
 	echo "Unable to install CPAN distributions!"
    fi
 
-
-  SHELL
-
+  CPAN
 end
