@@ -49,8 +49,10 @@ Vagrant.configure(2) do |config|
    sudo apt-get update
    sudo apt-get install -y ${packages[@]} 
 
-   echo '[ $SHLVL -eq 1 ] && eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"' >> $HOME/.profile
-   echo 'eval "$( perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"; cpanm $@' > $HOME/wcpanm && chmod 755 $HOME/wcpanm 
+   mkdir -p ~/opt/bin
+   echo PATH=~/opt/bin:$PATH >> ~/.profile
+   echo '[ $SHLVL -eq 1 ] && eval "$(perl -I~/perl5/lib/perl5 -Mlocal::lib)"' >> ~/.profile
+   echo 'eval "$( perl -I~/perl5/lib/perl5 -Mlocal::lib)"; cpanm $@' > ~/opt/bin/wcpanm && chmod 755 ~/opt/bin/wcpanm 
 
 #
 # TODO: Put wcpanm wrapper script in a local bin directory (~/bin).
