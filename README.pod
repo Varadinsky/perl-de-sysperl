@@ -16,7 +16,7 @@ You will need Vagrant and VirtualBox to run this environment.
 
 To install new modules from host machine, use wcpanm wrapper for cpanm, it will make sure that all local::lib environment variables are present.  
 
-vagrant ssh -c 'wcpanm Perl::Module'
+	vagrant ssh -c 'wcpanm Perl::Module'
 
 =head1 AUTHOR
 
